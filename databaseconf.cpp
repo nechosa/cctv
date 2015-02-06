@@ -27,6 +27,7 @@ DatabaseConf::~DatabaseConf()
 
 void DatabaseConf::on_connect1_clicked()
 {
+    ui->connect1->setText("Переподключиться к конфигурационной базе");
     // объявляем таймер
     timer1 = new QTimer(this);
     // "тушим" все элементы на форме
@@ -47,7 +48,7 @@ int DatabaseConf::listCam(QString ipAddr)
 }
 void DatabaseConf::on_connect2_clicked()
 {
-
+    ui->connect2->setText("Переподключиться к АСУПП");
     // объявляем таймер
     timer2 = new QTimer(this);
     // "тушим" все элементы на форме

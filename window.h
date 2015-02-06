@@ -3,12 +3,18 @@
 
 #include <QWidget>
 #include "databaseconf.h"
-//#include "server.h"
 #include "udpclient.h"
 #include <QMouseEvent>
 #include "videowgt.h"
 #include <QList>
 #include <QDesktopWidget>
+#include <QVector>
+#include <QProcess>
+
+#define NAME_PROGRAM "Представление  видеоинформации"
+#define CAMERA "Камера"
+#define PATH_ICON ":/icons/vista_189.ico"
+
 /*
 Класс для отображения и компоновки главной формы
 */
@@ -22,93 +28,52 @@ class Window : public QWidget
     Q_OBJECT
     
 public:
-   QDesktopWidget *desktop ;
+
+    explicit Window(QWidget *parent = 0);
+   ~Window();
+    VideoWgt *w[6];//обьекты видеоизображений
+    QThread *thread[6];
+
+   QRect screen1;
    QRect screen;
+   QRect screen2;
+
    int worktable;
    int fullscr;
-   explicit Window(QWidget *parent = 0);
-   ~Window();
-   VideoWgt *w0;
-   QMultiMap <QString,int> map;
+
    int key1;
-   void virtual keyPressEvent(QKeyEvent *event)
-   {
-       key1 = event->key();
-   }
-   void virtual keyReleaseEvent(QKeyEvent *event){
-    if(event->key()!=key1)
-    {
-        return;
-    }
-    key1 = 0;
-    switch (event->key()) {
-    case Qt::Key_F5:
-            showOn_MaxMin();
-        break;
-    case Qt::Key_S:
-        w->setVisibleButtons();
-        w1->setVisibleButtons();
-        w2->setVisibleButtons();
-        w3->setVisibleButtons();
-        w4->setVisibleButtons();
-        w5->setVisibleButtons();
-              break;
-          default:
-              break;
-          }
-      }
+
+   void setSceens();
+   void setSceen1( QDesktopWidget *desktop);
+   void setSceen2( QDesktopWidget *desktop);
+
+   void virtual keyPressEvent(QKeyEvent *event);
+   void virtual keyReleaseEvent(QKeyEvent *event);
+           void help();
+   //void setVisibleButtons(bool visible);
 
 
 
 private slots:
 
-    void play_on_UdpClient(QString path);
     void play_in_Window(QString path,unsigned int operStatus);
-
     void on_but_3_clicked();
-    //void on_but_2_clicked();
-    void on_but_4_clicked();
     void showOn_MaxMin();
-    void test();
-    void showMaxCam(int camera);
-    void showMaxCam1();
-    void showMaxCam2();
-    void showMaxCam3();
-    void showMaxCam4();
-    void showMaxCam5();
-    void showMaxCam6();
-   // void showMaxCam7(VideoWgt *w7);
-
-
     void on_but_5_clicked();
+    void on_param_clicked();
+
+public slots:
+    void showMaxCam(int);
 
 private:
     Ui::Window *ui;
-    //класс сервера
-   // Server *server;
-    //класс клиента
-    UdpClient *client;
-    //класс для базы данных
-    DatabaseConf *databases;
-    //обьекты видеоизображений
-    VideoWgt * w;
-    VideoWgt * w1;
-    VideoWgt * w2;
-    VideoWgt * w3;
-    VideoWgt * w4;
-    VideoWgt * w5;   // Video *v;
-
+    UdpClient *client; //класс клиента
+    DatabaseConf *databases; //класс для базы данных
+    QProcess *v_process;
 
 signals:
        void showOnMax();
        void showOnMin();
-
-       //void doubleClick();
-/*
-protected:
-      void mouseDoubleClickEvent(QMouseEvent *pe);
-      */
-
 
 
 };

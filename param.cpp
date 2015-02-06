@@ -78,11 +78,13 @@ void Param::on_tabWidget_selected(const QString &arg1)
      ui->label->setText(arg1);
 }
 
+/*
 void Param::on_tabWidget_currentChanged(QWidget *arg1)
 {
     ui->label->setText("on_tabWidget_currentChanged");
 }
 
+*/
 void Param::on_tabWidget_currentChanged(int index)
 {
     if (index==1)

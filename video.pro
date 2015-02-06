@@ -2,8 +2,11 @@
 #
 # Project created by QtCreator 2014-06-20T08:57:46
 #
-# Программа "Система видеонаблюдения"
-# Автор: Нечёса И.А.
+# Программа "Система отображения видеоинформации"
+# Назначение - Программа предназначена для отображения
+# потокового видео и локальных видеофайлов на ЭКП
+# Автор: Нечёса И.А.,
+# Отдел: 4372
 #-------------------------------------------------
 
 QT       += core gui sql network
@@ -35,17 +38,27 @@ FORMS    += videowgt.ui \
     udpclient.ui \
     connectsettingsdb.ui
 
- win32 {
-INCLUDEPATH +=../vlc/include/
+#INCLUDEPATH +=../vlc/include/
+#LIBS += -L../../vlc/lib -lvlc-qt-widgets -lvlc-qt
 
-INCLUDEPATH +=../../vlc/include/
-LIBS += -L../../vlc/lib -lvlc-qt-widgets
-LIBS += -L../../vlc/lib  -lvlc-qt
-LIBS += -L../../icu/lib  -licuin
-}
-unix{
-    LIBS        += -lvlc-qt -lvlc-qt-widgets
-}
+#INCLUDEPATH +=../../vlc_0_9_1/include/
+#INCLUDEPATH +=../../vlc_0_9_1/bin/
+#LIBS += -L../../vlc_0_9_1/lib -lvlc-qt-widgets -lvlc-qt
+
+INCLUDEPATH +=../../vlc_0_9/include/
+LIBS += -L../../vlc_0_9/lib -lvlc-qt-widgets
+LIBS += -L../../vlc_0_9/lib  -lvlc-qt
+
+#INCLUDEPATH +=../../vlc/include/
+
+#INCLUDEPATH +=../../vlc(0_8)/include/
+
+
+#LIBS += -L../../vlc(0_8)/lib -lvlc-qt-widgets -lvlc-qt
+#LIBS += -L../../vlc(0_10)/lib -lvlc-qt-widgets -lvlc-qt
+#LIBS += -L../../vlc/lib  -lvlc-qt
+#LIBS += -L../../vlc/debug  -lvlc-qt -lvlc-qt-widgets
+#LIBS += -L../../icu/lib  -licuin
 
 
 #INCLUDEPATH+=D:\\opencv\\opencv249\\opencv\\build\\include
@@ -70,9 +83,3 @@ unix{
 RESOURCES += \
     resourses.qrc
 RC_FILE = myicon.rc
-
-
-
-
-
-

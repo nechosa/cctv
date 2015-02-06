@@ -1559,6 +1559,9 @@ QTreeView::indicator:disabled, QTableView::indicator:disabled, QRadioButton::ind
         </item>
         <item>
          <widget class="QPushButton" name="param">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
           <property name="minimumSize">
            <size>
             <width>84</width>

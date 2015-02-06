@@ -35,7 +35,7 @@ public:
         unsigned int codoper;//Код операции 2 байта
         unsigned char operStatus;//Статус оперции 0-начата;1-завершена;2-вручную
         unsigned char nameLenth;//Длина строки
-        char codeMnemo[]; //имя мнемосхемы
+        const char codeMnemo[]; //имя мнемосхемы
     };
 #pragma pack()
     
@@ -46,6 +46,11 @@ private slots:
     void slotProcessDatagrams();
     void on_disconnect_clicked();
     void on_connect_clicked();
+
+
+    void on_clean_clicked();
+
+    void on_showCod_clicked();
 
 signals:
     void datasent(const QString);

@@ -9,6 +9,10 @@
 #include <vlc-qt/Instance.h>
 #include <vlc-qt/Media.h>
 #include <vlc-qt/MediaPlayer.h>
+#include <vlc-qt/Error.h>
+#include <QDesktopWidget>
+#include <QTimer>
+
 
 /*
 #include <opencv2/core/core.hpp>
@@ -36,26 +40,34 @@ class VideoWgt : public QWidget
     Q_OBJECT
 
 public:
-    explicit VideoWgt(QString Title,QWidget *parent = 0);
-
+  int camera;
+  void setCamera(int cam);
+  int getCamera(void);
+    explicit VideoWgt(QString Title,int camera,QWidget *parent = 0);
+   QRect screen;
+   QDesktopWidget *desktop ;
     void incCount();//увеличение счетчика принятого пакета
-    int getCount();// получение значения счетчика
+    int getCount() const;// получение значения счетчика
     void decCount();//уменьшение счетчика
     void setPath(QString newpath);
+    QString getPath(void);
     void setvisibleControlButtons();
-    bool getvisibleControlButtons();
+    bool getvisibleControlButtons() const;
+    void setWindowScreen(int screen,QDesktopWidget * desktopWindow);
+    int worktable;
+     ~VideoWgt();
     // void setCount();//установка счетчика
-
-    ~VideoWgt();
    //  virtual void mouseDoubleClickEvent(QMouseEvent *pe);
      void enterEvent(QEvent *);
      void leaveEvent(QEvent *);
      void setNumber(int n);
      int key;
+      virtual void closeEvent(QCloseEvent *event);
      void virtual keyPressEvent(QKeyEvent *event)
      {
          key = event->key();
      }
+     /*
      void virtual keyReleaseEvent(QKeyEvent *event){
       if(event->key()!=key)
       {
@@ -63,18 +75,25 @@ public:
       }
       key = 0;
       switch (event->key()) {
-      case Qt::Key_S:
+      case Qt::Key_H:
           this->setVisibleButtons();
-
+           break;
+      case Qt::Key_S:
+          this->help();
+          //this->setVisibleButtons();
+           break;
+      case Qt::Key_F1:
+          this->help();
                 break;
             default:
                 break;
             }
-        }
+        }*/
 private:
     Ui::VideoWgt *ui;
     VlcInstance *_instance;
     VlcMedia *_media;
+    VlcError *_error;
     VlcMediaPlayer *_player;
     Param  *par;
     QTimer *_timer;
@@ -83,6 +102,7 @@ private:
     int  count;
     bool visibleControlButtons;
     int number;
+
 
 private slots:
 
@@ -109,16 +129,18 @@ public slots:
      void setVideoWidgetTitle(QString title);
      void setVideoMax();
      void showMaxCam7();
+     void error(bool swith);
+
 
 signals:
      void formclose();
+     void close();
 
 signals:
        void sigClose();
-       void doubleClick();
+       void doubleClick(const int);
        void maxWindow();
 protected:
-      virtual void closeEvent(QCloseEvent *event);
        bool eventFilter(QObject *obj, QEvent *event);
 
 public slots:

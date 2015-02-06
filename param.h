@@ -43,7 +43,7 @@ private slots:
     void on_buttonBrowse_clicked();
     void on_pushButton_clicked();
     void on_tabWidget_selected(const QString &arg1);
-    void on_tabWidget_currentChanged(QWidget *arg1);
+   // void on_tabWidget_currentChanged(QWidget *arg1);
     void on_tabWidget_currentChanged(int index);
     void on_play_clicked();
     void on_tableView_clicked(const QModelIndex &index);
