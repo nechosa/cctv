@@ -48,6 +48,12 @@ INCLUDEPATH +=../../vlc_0_9/include/
 LIBS += -L../../vlc_0_9/lib -lvlc-qt-widgets
 LIBS += -L../../vlc_0_9/lib  -lvlc-qt
 
+VERSION = 0.0.0.1
+QMAKE_TARGET_COMPANY = Ilua Nechoysa
+QMAKE_TARGET_PRODUCT = cctv
+QMAKE_TARGET_DESCRIPTION =
+QMAKE_TARGET_COPYRIGHT = (c) Ilua Nechoysa
+
 }
 unix{
     LIBS        += -lvlc-qt -lvlc-qt-widgets
