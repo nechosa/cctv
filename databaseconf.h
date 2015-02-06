@@ -55,15 +55,15 @@ public slots:
     */
 
 private:
-// таймер для функции подключения
+    // таймер для функции подключения
     QTimer *timer1;
     QTimer *timer2;
-// модель данных
+    // модель данных
     QSqlTableModel *model1;
-// подключение к базе данных
+    // подключение к базе данных
     QSqlDatabase db1;
     QSqlTableModel *model2;
-// подключение к базе данных
+    // подключение к базе данных
     QSqlDatabase db2;
     QString number;
     QString name;

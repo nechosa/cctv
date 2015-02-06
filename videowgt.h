@@ -40,12 +40,12 @@ class VideoWgt : public QWidget
     Q_OBJECT
 
 public:
-  int camera;
-  void setCamera(int cam);
-  int getCamera(void);
+    int camera;
+    void setCamera(int cam);
+    int getCamera(void);
     explicit VideoWgt(QString Title,int camera,QWidget *parent = 0);
-   QRect screen;
-   QDesktopWidget *desktop ;
+    QRect screen;
+    QDesktopWidget *desktop ;
     void incCount();//увеличение счетчика принятого пакета
     int getCount() const;// получение значения счетчика
     void decCount();//уменьшение счетчика
@@ -55,19 +55,19 @@ public:
     bool getvisibleControlButtons() const;
     void setWindowScreen(int screen,QDesktopWidget * desktopWindow);
     int worktable;
-     ~VideoWgt();
+    ~VideoWgt();
     // void setCount();//установка счетчика
-   //  virtual void mouseDoubleClickEvent(QMouseEvent *pe);
-     void enterEvent(QEvent *);
-     void leaveEvent(QEvent *);
-     void setNumber(int n);
-     int key;
-      virtual void closeEvent(QCloseEvent *event);
-     void virtual keyPressEvent(QKeyEvent *event)
-     {
-         key = event->key();
-     }
-     /*
+    //  virtual void mouseDoubleClickEvent(QMouseEvent *pe);
+    void enterEvent(QEvent *);
+    void leaveEvent(QEvent *);
+    void setNumber(int n);
+    int key;
+    virtual void closeEvent(QCloseEvent *event);
+    void virtual keyPressEvent(QKeyEvent *event)
+    {
+        key = event->key();
+    }
+    /*
      void virtual keyReleaseEvent(QKeyEvent *event){
       if(event->key()!=key)
       {
@@ -122,30 +122,30 @@ private slots:
     void on_video_clicked();
 
 public slots:
-     void play(QString path);
-     void setVisibleButtons();
-     void stop();
-     bool isVisibleButtons();
-     void setVideoWidgetTitle(QString title);
-     void setVideoMax();
-     void showMaxCam7();
-     void error(bool swith);
+    void play(QString path);
+    void setVisibleButtons();
+    void stop();
+    bool isVisibleButtons();
+    void setVideoWidgetTitle(QString title);
+    void setVideoMax();
+    void showMaxCam7();
+    void error(bool swith);
 
 
 signals:
-     void formclose();
-     void close();
+    void formclose();
+    void close();
 
 signals:
-       void sigClose();
-       void doubleClick(const int);
-       void maxWindow();
+    void sigClose();
+    void doubleClick(const int);
+    void maxWindow();
 protected:
-       bool eventFilter(QObject *obj, QEvent *event);
+    bool eventFilter(QObject *obj, QEvent *event);
 
 public slots:
     void processFrameAndUpdateGui();
-/*
+    /*
 private:
     cv::Mat mat;
     cv::VideoCapture capture;

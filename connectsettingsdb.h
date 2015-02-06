@@ -16,7 +16,7 @@ public:
     ~ConnectSettingsDB();
     
 private:
- //   Ui::ConnectSettingsDB *ui;
+    //   Ui::ConnectSettingsDB *ui;
 };
 
 #endif // CONNECTSETTINGSDB_H

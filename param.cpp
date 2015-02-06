@@ -29,7 +29,7 @@ Param::~Param()
 {
     qDebug()<< "close Param";
     if (db.isOpen())
-      db.close();
+        db.close();
     delete ui;
 }
 
@@ -62,20 +62,20 @@ int Param::intmux()
 void Param::on_buttonBrowse_clicked()
 {
     QString path =QFileDialog::getExistingDirectory(this, QObject::tr("Open directory"),
-                                              ui->editPath->text(),
-                                              QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+                                                    ui->editPath->text(),
+                                                    QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
     ui->editPath->setText(path);
 }
 
 void Param::on_pushButton_clicked()
 {
-      //ui->tableView->setModel(model);
+    //ui->tableView->setModel(model);
 }
 
 void Param::on_tabWidget_selected(const QString &arg1)
 {
-     ui->label->setText(arg1);
+    ui->label->setText(arg1);
 }
 
 /*
@@ -89,8 +89,8 @@ void Param::on_tabWidget_currentChanged(int index)
 {
     if (index==1)
     {
-          ui->label->setText("1345");
-          if (db.isOpen())
+        ui->label->setText("1345");
+        if (db.isOpen())
             db.close();
     }
     if (index==2)
@@ -111,8 +111,8 @@ void Param::on_tabWidget_currentChanged(int index)
 
 void Param::connectToSql()
 {
-// указываем драйвер
-/*
+    // указываем драйвер
+    /*
     db = QSqlDatabase::addDatabase("QODBC");
 // указываем на соединение DSN
     db.setDatabaseName("mydsn");
@@ -123,56 +123,56 @@ void Param::connectToSql()
     db.setUserName("elton");
     db.setHostName("epica");
     db.setPassword("password");
-// если соединение установлено
+    // если соединение установлено
     if(db.open())
     {
-    // сообщение пользователю
-    ui->label->setText("<b>Соединение установлено,можно работать</b>");
-// активируем элементы управления
-    ui->tableView->setEnabled(true);
-    // объявляем модель данных
-    model = new QSqlTableModel(this);
-    // указываем таблицу из БД Test (смотри предыдущие уроки)
-    model->setTable("configuration");
-    // заносим данные в модель
-    // если удачно
-    if(model->select())
-    {
-        // передаем данные из модели в tableView
-        ui->tableView->setModel(model);
-        // устанавливаем высоту строки по тексту
-        ui->tableView->resizeRowsToContents();
-        ui->tableView->resizeColumnsToContents();
-        // шапка для первой колонки
-        /*model->setHeaderData(0, Qt::Horizontal, tr("Имя"));
+        // сообщение пользователю
+        ui->label->setText("<b>Соединение установлено,можно работать</b>");
+        // активируем элементы управления
+        ui->tableView->setEnabled(true);
+        // объявляем модель данных
+        model = new QSqlTableModel(this);
+        // указываем таблицу из БД Test (смотри предыдущие уроки)
+        model->setTable("configuration");
+        // заносим данные в модель
+        // если удачно
+        if(model->select())
+        {
+            // передаем данные из модели в tableView
+            ui->tableView->setModel(model);
+            // устанавливаем высоту строки по тексту
+            ui->tableView->resizeRowsToContents();
+            ui->tableView->resizeColumnsToContents();
+            // шапка для первой колонки
+            /*model->setHeaderData(0, Qt::Horizontal, tr("Имя"));
         // шапка для второй колонки
         model->setHeaderData(1, Qt::Horizontal, tr("Возраст"));
         */
-        // передача управления элементу tableView
-        ui->tableView->setFocus();
-     }
+            // передача управления элементу tableView
+            ui->tableView->setFocus();
+        }
         // если данные не перенеслись в модель
-    else
-    {
-        // показываем ошибку в статусе
-        ui->label->setText(model->lastError().text());
-    }
+        else
+        {
+            // показываем ошибку в статусе
+            ui->label->setText(model->lastError().text());
+        }
         // останавливаем таймер
         timer->stop();
     }
-// если БД не открыта
-else
-{
-// сообщение пользователю
-ui->label->setText("Ошибка соединения: "+db.lastError().text());
-// остановка таймера
-timer->stop();
-}
+    // если БД не открыта
+    else
+    {
+        // сообщение пользователю
+        ui->label->setText("Ошибка соединения: "+db.lastError().text());
+        // остановка таймера
+        timer->stop();
+    }
 }
 
 void Param::on_play_clicked()
 {
-     sendSignal(ui->url->text());
+    sendSignal(ui->url->text());
 
 }
 /*
@@ -189,6 +189,6 @@ void Param::on_tableView_clicked(const QModelIndex &index)
     //qDebug()<<  ui->tableView->model()->itemData(index).values().last().toString();
     if (index.column()==2)
         ui->url->setText(ui->tableView->model()->itemData(index).values().last().toString());
-     //qDebug()<< "***********************************";
-   // qDebug()<<index();
+    //qDebug()<< "***********************************";
+    // qDebug()<<index();
 }

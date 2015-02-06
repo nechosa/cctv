@@ -30,27 +30,27 @@ class Window : public QWidget
 public:
 
     explicit Window(QWidget *parent = 0);
-   ~Window();
+    ~Window();
     VideoWgt *w[6];//обьекты видеоизображений
     QThread *thread[6];
 
-   QRect screen1;
-   QRect screen;
-   QRect screen2;
+    QRect screen1;
+    QRect screen;
+    QRect screen2;
 
-   int worktable;
-   int fullscr;
+    int worktable;
+    int fullscr;
 
-   int key1;
+    int key1;
 
-   void setSceens();
-   void setSceen1( QDesktopWidget *desktop);
-   void setSceen2( QDesktopWidget *desktop);
+    void setSceens();
+    void setSceen1( QDesktopWidget *desktop);
+    void setSceen2( QDesktopWidget *desktop);
 
-   void virtual keyPressEvent(QKeyEvent *event);
-   void virtual keyReleaseEvent(QKeyEvent *event);
-           void help();
-   //void setVisibleButtons(bool visible);
+    void virtual keyPressEvent(QKeyEvent *event);
+    void virtual keyReleaseEvent(QKeyEvent *event);
+    void help();
+    //void setVisibleButtons(bool visible);
 
 
 
@@ -72,8 +72,8 @@ private:
     QProcess *v_process;
 
 signals:
-       void showOnMax();
-       void showOnMin();
+    void showOnMax();
+    void showOnMin();
 
 
 };

@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     Window wgt;
-     wgt.show();
+    wgt.show();
 
     return a.exec();
 }

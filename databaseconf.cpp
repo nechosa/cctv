@@ -19,10 +19,10 @@ DatabaseConf::DatabaseConf(QWidget *parent) :
 
 DatabaseConf::~DatabaseConf()
 {
-        qDebug()<< "close DatabaseConf";
+    qDebug()<< "close DatabaseConf";
     delete ui;
-     db1.close();
-     db2.close();
+    db1.close();
+    db2.close();
 }
 
 void DatabaseConf::on_connect1_clicked()
@@ -66,8 +66,8 @@ void DatabaseConf::on_connect2_clicked()
 // описываем функцию подключения к БД
 void DatabaseConf::connectToSql1()
 {
-// указываем драйвер
-/*
+    // указываем драйвер
+    /*
     db = QSqlDatabase::addDatabase("QODBC");
 // указываем на соединение DSN
     db.setDatabaseName("mydsn");
@@ -86,50 +86,50 @@ db.setPassword("password");
     db1.setUserName("elton");
     db1.setHostName("epica");
     db1.setPassword("password");
-// если соединение установлено
+    // если соединение установлено
     if(db1.open())
     {
-    // сообщение пользователю
-    ui->label->setText("<b>Соединение установлено,можно работать</b>");
-// активируем элементы управления
-    ui->database1->setEnabled(true);
-    // объявляем модель данных
-    model1 = new QSqlTableModel(this);
-    // указываем таблицу из БД Test (смотри предыдущие уроки)
-    model1->setTable("configuration");
-    // заносим данные в модель
-    // если удачно
-    if(model1->select())
-    {
-        // передаем данные из модели в tableView
-        ui->database1->setModel(model1);
-        // устанавливаем высоту строки по тексту
-        ui->database1->resizeRowsToContents();
-        // шапка для первой колонки
-        /*model->setHeaderData(0, Qt::Horizontal, tr("Имя"));
+        // сообщение пользователю
+        ui->label->setText("<b>Соединение установлено,можно работать</b>");
+        // активируем элементы управления
+        ui->database1->setEnabled(true);
+        // объявляем модель данных
+        model1 = new QSqlTableModel(this);
+        // указываем таблицу из БД Test (смотри предыдущие уроки)
+        model1->setTable("configuration");
+        // заносим данные в модель
+        // если удачно
+        if(model1->select())
+        {
+            // передаем данные из модели в tableView
+            ui->database1->setModel(model1);
+            // устанавливаем высоту строки по тексту
+            ui->database1->resizeRowsToContents();
+            // шапка для первой колонки
+            /*model->setHeaderData(0, Qt::Horizontal, tr("Имя"));
         // шапка для второй колонки
         model->setHeaderData(1, Qt::Horizontal, tr("Возраст"));
         */
-        // передача управления элементу tableView
-        ui->database1->setFocus();
-     }
+            // передача управления элементу tableView
+            ui->database1->setFocus();
+        }
         // если данные не перенеслись в модель
-    else
-    {
-        // показываем ошибку в статусе
-        ui->label->setText(model1->lastError().text());
-    }
+        else
+        {
+            // показываем ошибку в статусе
+            ui->label->setText(model1->lastError().text());
+        }
         // останавливаем таймер
         timer1->stop();
     }
-// если БД не открыта
-else
-{
-// сообщение пользователю
-ui->label->setText("Ошибка соединения: "+db1.lastError().text());
-// остановка таймера
-timer1->stop();
-}
+    // если БД не открыта
+    else
+    {
+        // сообщение пользователю
+        ui->label->setText("Ошибка соединения: "+db1.lastError().text());
+        // остановка таймера
+        timer1->stop();
+    }
 }
 
 void DatabaseConf::connectToSql2()
@@ -141,12 +141,12 @@ void DatabaseConf::connectToSql2()
         db.setDatabaseName("mydsn");
         */
 
-        db2 = QSqlDatabase::addDatabase("QPSQL7");
-        db2.setDatabaseName("ASUPP");
-        db2.setUserName("master");
-        db2.setHostName("172.16.24.39");
-        db2.setPassword("master");
-        /*
+    db2 = QSqlDatabase::addDatabase("QPSQL7");
+    db2.setDatabaseName("ASUPP");
+    db2.setUserName("master");
+    db2.setHostName("172.16.24.39");
+    db2.setPassword("master");
+    /*
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("configuration");
     db.setUserName("elton");
@@ -156,18 +156,18 @@ void DatabaseConf::connectToSql2()
 */
 
     // если соединение установлено
-        if(db2.open())
-        {
+    if(db2.open())
+    {
         // сообщение пользователю
         ui->label_2->setText("<b>Соединение установлено,можно работать</b>");
-    // активируем элементы управления
+        // активируем элементы управления
         ui->database2->setEnabled(true);
 
         QSqlQueryModel* model = new QSqlQueryModel();
-       // model2 = new QSqlQueryModel();
+        // model2 = new QSqlQueryModel();
         //model1 = new QSqlTableModel(this);
         // указываем таблицу из БД Test (смотри предыдущие уроки)
-/*
+        /*
         model->setQuery("SELECT id_complex, name, net_address, ser_num, tech_data "
                        "FROM org_complex "
                        "WHERE id_technical_mean = (SELECT id_technical_mean FROM org_technical_mean_type WHERE name = 'Цифровая видеокамера') "
@@ -184,18 +184,18 @@ void DatabaseConf::connectToSql2()
 
 
         model->setQuery("SELECT cmp.id_complex, cmp.name, cmp.net_address, cmp.ser_num, cmp.tech_data, whr.name_building, whr.num_room, whr.name_usage, whr.level "
-                       "FROM org_complex cmp "
-                       " LEFT JOIN "
-                       "(   SELECT bld.name_building, orm.num_room, orm.name_usage, orm.level, plc.id_complex "
-                       "    FROM org_place plc, org_room orm, org_building bld "
-                       "    WHERE plc.id_room = orm.id_room "
-                       "    AND orm.id_building = bld.id_building "
-                       "    AND date_accom = (SELECT max(date_accom) FROM org_place WHERE id_complex = plc.id_complex ) "
-                       ") whr "
-                       "ON cmp.id_complex = whr.id_complex "
-                       "WHERE id_technical_mean = (SELECT id_technical_mean FROM org_technical_mean_type WHERE name = 'Цифровая видеокамера') "
-                       "ORDER BY id_complex; "
-                                 );
+                        "FROM org_complex cmp "
+                        " LEFT JOIN "
+                        "(   SELECT bld.name_building, orm.num_room, orm.name_usage, orm.level, plc.id_complex "
+                        "    FROM org_place plc, org_room orm, org_building bld "
+                        "    WHERE plc.id_room = orm.id_room "
+                        "    AND orm.id_building = bld.id_building "
+                        "    AND date_accom = (SELECT max(date_accom) FROM org_place WHERE id_complex = plc.id_complex ) "
+                        ") whr "
+                        "ON cmp.id_complex = whr.id_complex "
+                        "WHERE id_technical_mean = (SELECT id_technical_mean FROM org_technical_mean_type WHERE name = 'Цифровая видеокамера') "
+                        "ORDER BY id_complex; "
+                        );
 
 
         if( model->lastError().isValid())
@@ -211,10 +211,10 @@ void DatabaseConf::connectToSql2()
         QTableView *view = new QTableView;
         view->setModel(model);
         view->show();*/
-           timer2->stop();
-        }
+        timer2->stop();
+    }
 
-        /********************************************************/
+    /********************************************************/
 
 }
 /*
@@ -287,20 +287,20 @@ void DatabaseConf::on_add_clicked()
 {
 
     // переменная функции записи
-        QSqlRecord rec = model1->record();
-        // значения имени
-        rec.setValue("number", ui->id->text());
-        rec.setValue("name",  ui->name->text());
-        // значение возраста
-        rec.setValue("url", ui->url->text());
-        rec.setValue("operation", "NULL");
+    QSqlRecord rec = model1->record();
+    // значения имени
+    rec.setValue("number", ui->id->text());
+    rec.setValue("name",  ui->name->text());
+    // значение возраста
+    rec.setValue("url", ui->url->text());
+    rec.setValue("operation", "NULL");
 
-        // запись в модель (это значит что и в SQL запишется тоже самое)
-        // "1" означает, что новая строка появится в самом конце списка
-        model1->insertRecord(-1, rec);
-        // обнуляем поля ввода
-        // выравниваем высоту строк по тексту
-        ui->database1->resizeRowsToContents();
+    // запись в модель (это значит что и в SQL запишется тоже самое)
+    // "1" означает, что новая строка появится в самом конце списка
+    model1->insertRecord(-1, rec);
+    // обнуляем поля ввода
+    // выравниваем высоту строк по тексту
+    ui->database1->resizeRowsToContents();
 
 
 }
@@ -310,9 +310,9 @@ void DatabaseConf::on_database2_clicked(const QModelIndex &index)
     //qDebug()<< "on_tableView_clicked";
 
     qDebug()<< "row";
-   qDebug()<<index.row();
+    qDebug()<<index.row();
     qDebug()<< "column";
-   qDebug()<<index.column();
+    qDebug()<<index.column();
     qDebug()<<  ui->database2->model()->itemData(index).values().last().toString();
 
     if (index.column()==2)
@@ -322,7 +322,7 @@ void DatabaseConf::on_database2_clicked(const QModelIndex &index)
     if (index.column()==0)
         ui->id->setText(ui->database2->model()->itemData(index).values().last().toString());
 
- //   QModelIndex index1 = new QModelIndex(-1,-1,0,model1);
+    //   QModelIndex index1 = new QModelIndex(-1,-1,0,model1);
     //qDebug()<<  ui->database2->model()->itemData(index1).values().last().toString();
     /*
     QString _number = ui->database1->model()->index(0,index.column()).data().toString();
@@ -345,8 +345,8 @@ void DatabaseConf::on_database2_clicked(const QModelIndex &index)
     if (index.column()==2)
         ui->url->setText(ui->tableView->model()->itemData(index).values().last().toString());
     */
-     //qDebug()<< "***********************************";
-   // qDebug()<<index();
+    //qDebug()<< "***********************************";
+    // qDebug()<<index();
 }
 /*
 void  DatabaseConf::setNumber(QString param)
@@ -376,7 +376,7 @@ void DatabaseConf::on_dell_clicked()
     QMessageBox::StandardButton stButtonYes;
     // присваиваем значение, которое выберет пользователь: "Yes" или "No"
     stButtonYes = QMessageBox::question(this, "Подтверждение удаления", "Вы действительно хотите удалить строку?",
-    QMessageBox::Yes | QMessageBox::No);
+                                        QMessageBox::Yes | QMessageBox::No);
     // проверяем нажата ли кнопка "Yes"
     if(stButtonYes == QMessageBox::Yes)
     {
@@ -421,6 +421,6 @@ void DatabaseConf::on_connect_settings_db2_clicked()
     settingsdb2 = new ConnectSettingsDB();
     //databases->setModal(true); // говорим форме что она модальна
     settingsdb2->show();//exec(); // подтверждаем выполнение
-     settingsdb2->setWindowTitle("Настройки подключения к АСУПП");
+    settingsdb2->setWindowTitle("Настройки подключения к АСУПП");
 
 }

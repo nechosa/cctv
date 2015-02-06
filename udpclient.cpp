@@ -51,8 +51,8 @@ void UdpClient::slotProcessDatagrams()
         ui->log->append("--------------------------------------------------------");
         ui->log->append("operStatus = "+ QString::number(sendMnemoTest->operStatus));
         ui->log->append("--------------------------------------------------------");
-         int cod = (int) sendMnemoTest->codoper; //unsigned int cod = -256;
-         ui->log->append("codoper = "+ QString::number(sendMnemoTest->codoper)+"("+QString::number(cod)+")");
+        int cod = (int) sendMnemoTest->codoper; //unsigned int cod = -256;
+        ui->log->append("codoper = "+ QString::number(sendMnemoTest->codoper)+"("+QString::number(cod)+")");
         ui->log->append("--------------------------------------------------------");
         ui->log->append("codeMnemo = "+ QString(sendMnemoTest->codeMnemo));
         ui->log->append("--------------------------------------------------------");

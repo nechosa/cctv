@@ -5,7 +5,7 @@ ConnectSettingsDB::ConnectSettingsDB(QWidget *parent) :
     QDialog(parent)
   //,    ui(new Ui::ConnectSettingsDB)
 {
-  //i->setupUi(this);
+    //i->setupUi(this);
 }
 
 ConnectSettingsDB::~ConnectSettingsDB()

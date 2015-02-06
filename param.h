@@ -27,7 +27,7 @@ public:
     {
         emit datasent(path);
     }
-/*
+    /*
     void sendSignal()
     {
         emit sendString("Information");
@@ -43,7 +43,7 @@ private slots:
     void on_buttonBrowse_clicked();
     void on_pushButton_clicked();
     void on_tabWidget_selected(const QString &arg1);
-   // void on_tabWidget_currentChanged(QWidget *arg1);
+    // void on_tabWidget_currentChanged(QWidget *arg1);
     void on_tabWidget_currentChanged(int index);
     void on_play_clicked();
     void on_tableView_clicked(const QModelIndex &index);
@@ -54,7 +54,7 @@ public slots:
     int intmux();
     void setUrl(QString mypath);
 public slots:
-// функция подключения к базе данных
+    // функция подключения к базе данных
     void connectToSql();
 
 private:
