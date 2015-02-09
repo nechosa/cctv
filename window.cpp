@@ -1,7 +1,6 @@
 #include "window.h"
 #include "ui_window.h"
 #include <QVector>
-#include <QThread>
 
 /*
 Главная форма для конструкции обектов видеоизображения
@@ -13,7 +12,8 @@ Window::Window(QWidget *parent) :
     ui(new Ui::Window)
 {
     ui->setupUi(this);
-    //visibleButtons = false;
+
+
     setWindowTitle(NAME_PROGRAM);
     setWindowIcon(QIcon(PATH_ICON));
     QGridLayout* pgrdLayout = new QGridLayout;
@@ -25,7 +25,6 @@ Window::Window(QWidget *parent) :
     connect(client,SIGNAL(datasent1(QString,unsigned int)),this,SLOT(play_in_Window(QString,unsigned int)));
     for(int i = 0;i<6;++i)
     {
-        //thread[i] = new QThread();
         w[i] =  new VideoWgt(CAMERA+QString::number(i+1),i);
         w[i]->setVideoWidgetTitle(CAMERA+QString::number(i+1));
         if (i<3)
@@ -38,12 +37,6 @@ Window::Window(QWidget *parent) :
         }
         connect(ui->showbut,SIGNAL(clicked()),w[i],SLOT(setVisibleButtons()));
         connect(w[i],SIGNAL(doubleClick(int)),this,SLOT(showMaxCam(int)));
-        /*
-        connect(thread[i],SIGNAL(started(QPrivateSignal)),w[i],SLOT(play(QString)));
-        connect(thread[i],SIGNAL(finished(QPrivateSignal)),w[i],SLOT(stop()));
-        w[i]->moveToThread(thread[i]);
-        thread[i]->start();
-        */
     }
 
 
@@ -63,10 +56,13 @@ Window::Window(QWidget *parent) :
     default:
         break;
     }
+
+    settings = new QSettings("video","SettingsTutorial", this);
 }
 
 Window::~Window()
 {
+    saveSettings();
     delete ui;
     delete client;
     delete databases;
@@ -289,6 +285,16 @@ void Window::help()
     }
 
 
+}
+
+void Window::saveSettings()
+{
+
+}
+
+void Window::loadSettings()
+{
+    //setWindowsTitle(settings->value("title","MainForm").toString());
 }
 
 void Window::keyReleaseEvent(QKeyEvent *event){

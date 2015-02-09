@@ -53,9 +53,11 @@ VideoWgt::VideoWgt(QString Title,int camera,QWidget *parent) :
      * так как библиотека выдает ошибку, если не воспроизводится ни одного файла или потока
      */
 
+    /*
     _media = new VlcMedia("test.mp4", true, _instance);
     _player->open(_media);
     _player->stop();
+    */
 
     /*************************************************/
     par = new Param(path);
@@ -67,12 +69,6 @@ VideoWgt::VideoWgt(QString Title,int camera,QWidget *parent) :
     connect(par,SIGNAL(datasent(QString)),this,SLOT(play(QString)));
     //  QObject::connect(this,SIGNAL(doubleClick()),SLOT(showFullScreen()));
 
-
-}
-
-void VideoWgt::error(bool swith)
-{
-    qDebug()<<"error";
 
 }
 void VideoWgt::setCamera(int cam)
@@ -108,36 +104,9 @@ void VideoWgt::setVideoMax()
 {
     ui->video->setMaximumWidth(ui->groupBox->maximumHeight()-100);
 }
-void VideoWgt::closeEvent(QCloseEvent *event)
-{
-    this->~VideoWgt();
-    /*
-    emit sigClose();
-    event->accept();
-    */
-}
 
 void VideoWgt::setvisibleControlButtons()
 {
-    /*
-    ui->play->show();
-    ui->param->show();
-    ui->onMaxWindow->show();
-    ui->record->show();
-      ui->stop->show();
-      */
-
-
-    /*
-    if (!visibleControlButtons)
-    {
-    ui->play->hide();
-    ui->param->hide();
-     ui->record->hide();
-       ui->onMaxWindow->hide();
-       ui->stop->hide();
-    }
-    */
     if (!visibleControlButtons)
     {
         visibleControlButtons = true;
@@ -179,10 +148,6 @@ bool VideoWgt::eventFilter(QObject *obj, QEvent *event)
         if (event->type()==QEvent::MouseButtonDblClick)
         {
             qDebug()<<"  emit doubleClick();";
-            //setvisibleControlButtons();
-            // emit doubleClick();
-
-            // QMouseEvent *mouseEvent = static_cast<QMouseEvent>(event)
             return true;
         }
         else
@@ -190,7 +155,6 @@ bool VideoWgt::eventFilter(QObject *obj, QEvent *event)
             {
                 qDebug()<<"  emit MouseButtonPress();";
                 emit doubleClick(getCamera());
-                //setvisibleControlButtons();
                 return true;
             }
             else
@@ -202,7 +166,6 @@ bool VideoWgt::eventFilter(QObject *obj, QEvent *event)
         {
             qDebug()<<"  emit doubleClick();";
             emit doubleClick(getCamera());
-            // QMouseEvent *mouseEvent = static_cast<QMouseEvent>(event)
             return true;
         }
         else
@@ -234,11 +197,6 @@ void VideoWgt::play(QString path)
     qDebug()<<"play";
     qDebug()<<path.contains("rtsp:");
     if (path.contains("rtsp")||path.contains("udp"))
-        // if ((path.mid(0,3)=="udp")||(path.mid(0,5)=="rtsp:"))
-        //if ((path.compare(path,"rtsp://",Qt::CaseInsensitive)==1)&&(path.compare(path.mid(0,5),"udp://",Qt::CaseInsensitive)==1))
-        /*&&(path.compare(path,"udp://",Qt::CaseInsensitive)==1)&&(path.compare(path,"http://",Qt::CaseInsensitive)==1)&&
-        (path.compare(path,"rtp://",Qt::CaseInsensitive)==1)&&
-        (path.compare(path,"mms://",Qt::CaseInsensitive)==1))*/
     {
         qDebug()<<"stream";
         _media = new VlcMedia(path, false, _instance);
@@ -248,7 +206,6 @@ void VideoWgt::play(QString path)
     }
     else
     {
-        //qDebug()<<"file";
         _media = new VlcMedia(path, true, _instance);
         _player->open(_media);
     }
@@ -284,18 +241,6 @@ void VideoWgt::setNumber(int n)
 void VideoWgt::on_onMaxWindow_clicked()
 {
     emit maxWindow();
-    /*
-    VlcWidgetVideo *videoWgt1 = new VlcWidgetVideo;
-    qDebug() << "showFullScreen();";
-    VlcMedia *media6 = new VlcMedia(path, true, _instance);
-    VlcMediaPlayer *player = new VlcMediaPlayer(_instance);
-
-    player->setVideoWidget(videoWgt1);
-    videoWgt1->showFullScreen();
-   // videoWgt1->showNormal();
-    player->open(media6);
-    */
-
 }
 
 void VideoWgt::on_param_clicked()
@@ -304,12 +249,6 @@ void VideoWgt::on_param_clicked()
     par->show();//exec(); // подтверждаем выполнение
 
 }
-/*
-void  VideoWgt::setVisibleButtons(bool visible)
-{
-    visibleButtons = visible;
-}
-*/
 void VideoWgt::setVisibleButtons()
 {
 
@@ -343,55 +282,13 @@ bool VideoWgt::isVisibleButtons()
 
 void VideoWgt::on_record_clicked()
 {
-    qDebug()<<"***********************************************time***********************************************";
     qDebug()<<_player->time();
     qDebug()<<_player->registerUserData();
     qDebug()<<_player->dynamicPropertyNames();
     qDebug()<<_player->length();
     qDebug()<<_player->position();
-    /*
-    capture.release();
-    if (!capture.open(0)) {
-        qWarning() << tr("error: capWebCam not accessed successfully");
-        return;
-    }
-
-    QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(processFrameAndUpdateGui()));
-    timer->start(20);
-    if (ui->video->isVisible())
-    {
-     ui->video->setVisible(false);
-     ui->label->setVisible(true);
-    }
-    else
-    {
-     ui->video->setVisible(true);
-     ui->label->setVisible(false);
-    }
-    */
-    /*
-    _media = new VlcMedia("ui->editUrl->text()", _instance);
-    _media->record("ui->editName->text()","ui->editPath->text()",
-                   Vlc::Mux(par->intmux()),
-                   Vlc::AudioCodec(par->intaudio()),
-                   Vlc::VideoCodec(par->intvideo())
-                   );
-    _player->open(_media);
-    _timer->start(20000);
-    */
-
 }
 
-void VideoWgt::processFrameAndUpdateGui()
-{
-    /*
-    if (capture.read(mat)) {
-        QImage image((uchar*)mat.data, mat.cols, mat.rows, mat.step, QImage::Format_RGB888);
-        ui->label->setPixmap(QPixmap::fromImage(image));
-    }
-    */
-}
 void VideoWgt::on_play_clicked()
 {
 
@@ -421,49 +318,10 @@ void VideoWgt::on_video_fullscreen()
 {
 
 }
-void VideoWgt::enterEvent(QEvent *)
-{
-    /*
-    ui->play->show();
-    ui->param->show();
-    ui->onMaxWindow->show();
-    ui->record->show();
-      ui->stop->show();
-      */
-}
+
 void VideoWgt::setWindowScreen(int screen,QDesktopWidget * desktopWindow){
     worktable = screen;
 }
-void VideoWgt::leaveEvent(QEvent *)
-{
-    /*
-    if (!visibleControlButtons)
-    {
-    ui->play->hide();
-    ui->param->hide();
-     ui->record->hide();
-       ui->onMaxWindow->hide();
-       ui->stop->hide();
-    }
-    */
-}
-/*
-void VideoWgt::on_horizontalSlider_actionTriggered(int action)
-{
-
-}
-
-void VideoWgt::on_verticalSlider_actionTriggered(int action)
-{
-}
-*/
-/*
-void VideoWgt::on_horizontalSlider_sliderMoved(int position)
-{
-    ui->volume->setVolume(position);
-     qDebug()<< position;
-}
-*/
 
 void VideoWgt::on_groupBox_clicked()
 {
@@ -482,9 +340,6 @@ void VideoWgt::on_video_clicked()
 
 void VideoWgt::showMaxCam7()
 {
-
-
-
     if (this->isFullScreen())
     {
         screen =  QApplication::desktop()->screenGeometry(1);

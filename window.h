@@ -10,6 +10,7 @@
 #include <QDesktopWidget>
 #include <QVector>
 #include <QProcess>
+#include <QSettings>
 
 #define NAME_PROGRAM "Представление  видеоинформации"
 #define CAMERA "Камера"
@@ -49,8 +50,12 @@ public:
 
     void virtual keyPressEvent(QKeyEvent *event);
     void virtual keyReleaseEvent(QKeyEvent *event);
+
+
     void help();
-    //void setVisibleButtons(bool visible);
+    void saveSettings();
+    void loadSettings();
+
 
 
 
@@ -70,6 +75,7 @@ private:
     UdpClient *client; //класс клиента
     DatabaseConf *databases; //класс для базы данных
     QProcess *v_process;
+    QSettings *settings;
 
 signals:
     void showOnMax();

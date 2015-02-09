@@ -58,37 +58,12 @@ public:
     ~VideoWgt();
     // void setCount();//установка счетчика
     //  virtual void mouseDoubleClickEvent(QMouseEvent *pe);
-    void enterEvent(QEvent *);
-    void leaveEvent(QEvent *);
     void setNumber(int n);
     int key;
-    virtual void closeEvent(QCloseEvent *event);
     void virtual keyPressEvent(QKeyEvent *event)
     {
         key = event->key();
     }
-    /*
-     void virtual keyReleaseEvent(QKeyEvent *event){
-      if(event->key()!=key)
-      {
-          return;
-      }
-      key = 0;
-      switch (event->key()) {
-      case Qt::Key_H:
-          this->setVisibleButtons();
-           break;
-      case Qt::Key_S:
-          this->help();
-          //this->setVisibleButtons();
-           break;
-      case Qt::Key_F1:
-          this->help();
-                break;
-            default:
-                break;
-            }
-        }*/
 private:
     Ui::VideoWgt *ui;
     VlcInstance *_instance;
@@ -129,7 +104,6 @@ public slots:
     void setVideoWidgetTitle(QString title);
     void setVideoMax();
     void showMaxCam7();
-    void error(bool swith);
 
 
 signals:
@@ -142,14 +116,6 @@ signals:
     void maxWindow();
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
-
-public slots:
-    void processFrameAndUpdateGui();
-    /*
-private:
-    cv::Mat mat;
-    cv::VideoCapture capture;
-    */
 
 };
 

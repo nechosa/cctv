@@ -13,12 +13,6 @@ QT       += core gui sql network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network
 
-VERSION = 0.0.0.1
-QMAKE_TARGET_COMPANY = Ilua Nechoysa
-QMAKE_TARGET_PRODUCT = cctv
-QMAKE_TARGET_DESCRIPTION = Decription of the project
-QMAKE_TARGET_COPYRIGHT = (c) Ilua Nechoysa
-
 TARGET = video
 TEMPLATE = app
 
@@ -57,13 +51,6 @@ FORMS    += videowgt.ui \
 INCLUDEPATH +=../../vlc(0_9)/include/
 LIBS += -L../../vlc(0_9)/lib -lvlc-qt-widgets
 LIBS += -L../../vlc(0_9)/lib  -lvlc-qt
-
-#VERSION = 0.0.0.1
-#QMAKE_TARGET_COMPANY = Ilua Nechoysa
-#QMAKE_TARGET_PRODUCT = cctv
-#QMAKE_TARGET_DESCRIPTION = Decription of the project
-#QMAKE_TARGET_COPYRIGHT = (c) Ilua Nechoysa
-
 }
 unix{
     LIBS        += -lvlc-qt -lvlc-qt-widgets
@@ -87,7 +74,12 @@ unix{
 #-lopencv_imgproc249d
 
 
-
+win32 {
 RESOURCES += \
     resourses.qrc
 RC_FILE = myicon.rc
+
+}
+unix{
+
+}
