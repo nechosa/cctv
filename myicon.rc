@@ -1,1 +1,29 @@
 IDI_ICON1               ICON    DISCARDABLE     "vista_189.ico"
+
+#include <windows.h>
+#include "version.h"
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     1,0,0,1
+PRODUCTVERSION  1,0,0,1
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE   "CompanyName",      "Nechoysa Co."
+            VALUE   "LegalCopyright",   "Nechoysa  Ilua (c)"
+            VALUE   "FileDescription",  "Present videoinformation"
+            VALUE   "FileVersion",      "1.0.0.1"
+            VALUE   "ProductName",      "CCTV"
+            VALUE   "ProductVersion",    VER
+            VALUE   "OriginalFilename", "video.exe"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0019, 1252 //RU
+      //VALUE "Translation",  0x409, 1252 //EN
+
+    END
+END
