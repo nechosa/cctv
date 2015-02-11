@@ -53,11 +53,12 @@ VideoWgt::VideoWgt(QString Title,int camera,QWidget *parent) :
      * так как библиотека выдает ошибку, если не воспроизводится ни одного файла или потока
      */
 
-    /*
-    _media = new VlcMedia("test.mp4", true, _instance);
+    _media = new VlcMedia(NULL, true, _instance);
+   /*_media = new VlcMedia("test.mp4", true, _instance);
     _player->open(_media);
     _player->stop();
     */
+
 
     /*************************************************/
     par = new Param(path);
@@ -320,6 +321,7 @@ void VideoWgt::on_video_fullscreen()
 }
 
 void VideoWgt::setWindowScreen(int screen,QDesktopWidget * desktopWindow){
+    Q_UNUSED(desktopWindow);
     worktable = screen;
 }
 
@@ -330,6 +332,7 @@ void VideoWgt::on_groupBox_clicked()
 
 void VideoWgt::on_groupBox_clicked(bool checked)
 {
+    Q_UNUSED(checked);
     this->setVisibleButtons();
 }
 

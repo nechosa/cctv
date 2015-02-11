@@ -926,7 +926,16 @@ QTreeView::indicator:disabled, QTableView::indicator:disabled, QRadioButton::ind
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>6</number>
+   </property>
+   <property name="topMargin">
+    <number>6</number>
+   </property>
+   <property name="rightMargin">
+    <number>6</number>
+   </property>
+   <property name="bottomMargin">
     <number>6</number>
    </property>
    <property name="spacing">
@@ -959,7 +968,7 @@ QTreeView::indicator:disabled, QTableView::indicator:disabled, QRadioButton::ind
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="but_5">
+      <widget class="QPushButton" name="move">
        <property name="text">
         <string>Переместить на другой рабочий стол</string>
        </property>

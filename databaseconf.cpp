@@ -44,6 +44,7 @@ void DatabaseConf::on_connect1_clicked()
 
 int DatabaseConf::listCam(QString ipAddr)
 {
+    Q_UNUSED(ipAddr)
     return 1;
 }
 void DatabaseConf::on_connect2_clicked()

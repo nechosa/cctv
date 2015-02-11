@@ -73,10 +73,10 @@ private:
     Param  *par;
     QTimer *_timer;
     QString path;
-    bool visibleButtons;
     int  count;
-    bool visibleControlButtons;
     int number;
+    bool visibleControlButtons;
+    bool visibleButtons;
 
 
 private slots:

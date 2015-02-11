@@ -1,7 +1,8 @@
 #include "window.h"
 #include "ui_window.h"
 #include <QVector>
-
+#define SETXY(x0,x1,w) x0+(int)(x1-w)/2
+//screen.x()+(int)(screen.width()-this->width())/2;
 /*
 Главная форма для конструкции обектов видеоизображения
 */
@@ -23,6 +24,7 @@ Window::Window(QWidget *parent) :
     databases = new DatabaseConf();
     client->setStyleSheet(this->styleSheet());
     connect(client,SIGNAL(datasent1(QString,unsigned int)),this,SLOT(play_in_Window(QString,unsigned int)));
+    connect(ui->move,SIGNAL(clicked()),this,SLOT(moveScreen()));
     for(int i = 0;i<6;++i)
     {
         w[i] =  new VideoWgt(CAMERA+QString::number(i+1),i);
@@ -38,26 +40,54 @@ Window::Window(QWidget *parent) :
         connect(ui->showbut,SIGNAL(clicked()),w[i],SLOT(setVisibleButtons()));
         connect(w[i],SIGNAL(doubleClick(int)),this,SLOT(showMaxCam(int)));
     }
-
-
-
     ui->_wgt->setLayout(pgrdLayout);
 
-    switch (worktable) {
-    case 1:
-        ui->but_5->setEnabled(false);
-        break;
-    case 2:
-        screen1 =  QApplication::desktop()->screenGeometry(1);
-        this->move(QPoint(screen1.x()+(screen1.width()-this->width())/4,screen1.y()+(screen1.height()-this->height())/4));
-        client->move(QPoint(screen1.x()+(screen1.width()-client->width())/2,screen1.y()+(screen1.height()-client->height())/2));
-        databases->move(QPoint(screen1.x()+(screen1.width()-databases->width())/2,screen1.y()+(screen1.height()-databases->height())/2));
-        break;
-    default:
-        break;
-    }
 
-    settings = new QSettings("video","SettingsTutorial", this);
+
+
+    switch (QApplication::screens().count()) {
+    case 2:
+        worktable = 1;
+       // worktable = 0;
+        break;
+    case 1:
+    default:
+        ui->move->setEnabled(false);
+        worktable = 0;
+        //worktable = 1;
+        break;
+
+    }
+   // screen = QApplication::desktop()->screenGeometry(worktable);
+   // worktable = !worktable;
+    screen = QApplication::desktop()->screenGeometry(worktable);
+
+    int this_x1 = SETXY(screen.x()-200,screen.width(),this->width());
+    int this_y1 = SETXY(screen.y()-150,screen.height(),this->height());
+    int cli_x1 = SETXY(screen.x(),screen.width(),client->width());
+    int cli_y1 = SETXY(screen.y(),screen.height(),client->height());
+    int db_x1 = SETXY(screen.x(),screen.width(),databases->width());
+    int db_y1 = SETXY(screen.y(),screen.height(),databases->height());
+    this->setGeometry(this_x1,this_y1,this->width(),this->height());
+    client->setGeometry(cli_x1,cli_y1,client->width(),client->height());
+    databases->setGeometry(db_x1,db_y1,databases->width(),databases->height());
+
+    //screen = QApplication::desktop()->screenGeometry(worktable);
+    //Add Settings
+    //this->setGeometry();
+    //client->setGeometry();
+    //databases->setGeometry();
+
+    //No Settings
+    /*
+    worktable = !worktable;
+    moveScreen();
+    */
+
+
+ //worktable = 1;
+    //settings = new QSettings("D:\\wsettings.ini", QSettings::IniFormat,this);
+   // loadSettings();
 }
 
 Window::~Window()
@@ -81,19 +111,13 @@ void Window::showMaxCam(int camera)
         {
             this->showNormal();
             visible = false;
-            if (worktable==2)
-            {
-                this->move(QPoint(screen1.x()+(screen1.width()-this->width())/4,screen1.y()+(screen1.height()-this->height())/4));
-            }
+            moveScreen(false);
         }
         else
         {
             this->showFullScreen();
             visible = true;
-            if (worktable==2)
-            {
-                this->move(QPoint(screen1.x(),screen1.y()));
-            }
+            moveScreen(false);
         }
     }
 
@@ -102,14 +126,14 @@ void Window::showMaxCam(int camera)
         ui->showbut->hide();
         ui->but_3->hide();
         ui->param->hide();
-        ui->but_5->hide();
+        ui->move->hide();
     }
     else
     {
         ui->showbut->show();
         ui->but_3->show();
         ui->param->show();
-        ui->but_5->show();
+        ui->move->show();
     }
     for(int i = 0;i<6;++i)
     {
@@ -161,9 +185,12 @@ void Window::play_in_Window(QString path,unsigned int operStatus)
         w7->setFocus();
         w7->play(path);
         QObject::connect(w7,SIGNAL(doubleClick()),w7,SLOT(showMaxCam7()));
-        if (worktable==2)
+        if (worktable)
         {
-            w7->move(QPoint(screen1.x()+(screen1.width()-client->width())/2,screen1.y()+(screen1.height()-client->height())/2));
+            int w7_x1 = SETXY(screen.x(),screen.width(),w7->width());
+            int w7_y1 = SETXY(screen.y(),screen.height(),w7->height());
+            w7->setGeometry(w7_x1,w7_y1,w7->width(),w7->height());
+
         }
         break;
     }
@@ -184,79 +211,55 @@ void Window::on_param_clicked()
 }
 
 void Window::showOn_MaxMin(){
-
     if (this->isFullScreen())
     {
-        this->showNormal();
         fullscr = 0;
+        moveScreen(false);//при перемещении формы сбрасывается флаг установки полного экрана
+        this->showNormal();
     }
     else
     {
-        this->showFullScreen();
-        if (worktable==2)
-        {
-            this->move(QPoint(screen1.x(),screen1.y()));
-        }
+        this->showFullScreen();//для сохранения расширения первого экрана
         fullscr = 1;
+        moveScreen(false);//при перемещении формы сбрасывается флаг установки полного экрана
+        this->showFullScreen();//установка флага полного экрана
     }
 }
 
-void Window::setSceen1(QDesktopWidget *desktop){
+void Window::moveScreen(bool change ){
     if (fullscr)
     {
-        screen =  desktop->screenGeometry(1);
-        this->move(QPoint(screen.x(),screen.y()));
-        client->move(QPoint(screen.x()+(screen.width()-client->width())/2,screen.y()+(screen.height()-client->height())/2));
-        databases->move(QPoint(screen.x()+(screen.width()-databases->width())/2,screen.y()+(screen.height()-databases->height())/2));
-
-
+        if (change)
+        {
+            worktable = !worktable;
+        }
+         screen = QApplication::desktop()->screenGeometry(worktable);
+         this->setGeometry(screen.x(),screen.y(),this->width(),this->height());
+         int cli_x1 = SETXY(screen.x(),screen.width(),client->width());
+         int cli_y1 = SETXY(screen.y(),screen.height(),client->height());
+         int db_x1 = SETXY(screen.x(),screen.width(),databases->width());
+         int db_y1 = SETXY(screen.y(),screen.height(),databases->height());
+         client->setGeometry(cli_x1,cli_y1,client->width(),client->height());
+         databases->setGeometry(db_x1,db_y1,databases->width(),databases->height());
     }
     else
     {
-        screen1 =  desktop->screenGeometry(1);
-        this->move(QPoint(screen1.x()+(screen1.width()-this->width())/2,screen1.y()+(screen1.height()-this->height())/2));
-        client->move(QPoint(screen1.x()+(screen1.width()-client->width())/2,screen1.y()+10+(screen1.height()-client->height())/2));
-        databases->move(QPoint(screen1.x()+(screen1.width()-databases->width())/2,screen1.y()+(screen1.height()-databases->height())/2));
-    }
-}
-
-void Window::setSceen2(QDesktopWidget *desktop){
-    if (fullscr)
-    {
-        screen =  desktop->screenGeometry(2);
-        this->move(QPoint(screen.x()/*+(screen.width()-this->width())/2*/,screen.y()/*+(screen.height()-this->height())/2)*/));
-        client->move(QPoint(screen.x()+(screen.width()-client->width())/2+screen1.width()/2-100,screen.y()-100+(screen.height()-client->height())/2+screen1.height()/2-100));
-        databases->move(QPoint(screen.x()+(screen.width()-databases->width()+screen1.width())/2,screen.y()+(screen2.height()-databases->height())/2+screen1.height()/2-100));
-    }
-    else
-    {
-        screen2 =  desktop->screenGeometry(2);
-        this->move(QPoint(screen2.x()+(screen2.width()-this->width())/2+screen1.width()/2-100,screen2.y()+(2*screen2.height()-this->height())/2+screen1.height()/2-100));
-        client->move(QPoint(screen2.x()+(screen2.width()-client->width())/2+screen1.width()/2-100,screen2.y()-100+(screen2.height()-client->height())/2+screen1.height()/2-100));
-        databases->move(QPoint(screen2.x()+(screen2.width()-databases->width()+screen1.width())/2,screen2.y()+(screen2.height()-databases->height())/2+screen1.height()/2-100));
-    }
-}
-
-void Window::setSceens()
-{
-    if (worktable==1)
-    {
-        setSceen1(QApplication::desktop());
-        worktable=2;
-        return;
+        if (change)
+        {
+            worktable = !worktable;
+        }
+        screen = QApplication::desktop()->screenGeometry(worktable);
+        int this_x1 = SETXY(screen.x(),screen.width(),this->width());
+        int this_y1 = SETXY(screen.y(),screen.height(),this->height());
+        int cli_x1 = SETXY(screen.x(),screen.width(),client->width());
+        int cli_y1 = SETXY(screen.y(),screen.height(),client->height());
+        int db_x1 = SETXY(screen.x(),screen.width(),databases->width());
+        int db_y1 = SETXY(screen.y(),screen.height(),databases->height());
+        this->setGeometry(this_x1,this_y1,this->width(),this->height());
+        client->setGeometry(cli_x1,cli_y1,client->width(),client->height());
+        databases->setGeometry(db_x1,db_y1,databases->width(),databases->height());
     }
 
-    if (worktable==2)
-    {
-        setSceen2(QApplication::desktop());
-        worktable=1;
-        return;
-    }
-}
-
-void Window::on_but_5_clicked()
-{
-    setSceens();
 }
 
 void  Window::keyPressEvent(QKeyEvent *event)

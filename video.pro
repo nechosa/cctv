@@ -38,19 +38,21 @@ FORMS    += videowgt.ui \
     udpclient.ui \
     connectsettingsdb.ui
 
-#INCLUDEPATH +=../../vlc_0_9_1/include/
-#INCLUDEPATH +=../../vlc_0_9_1/bin/
-#LIBS += -L../../vlc_0_9_1/lib -lvlc-qt-widgets -lvlc-qt
-
- win32 {
-
-#INCLUDEPATH +=../../vlc_0_9/include/
-#LIBS += -L../../vlc_0_9/lib -lvlc-qt-widgets
-#LIBS += -L../../vlc_0_9/lib  -lvlc-qt
-
-INCLUDEPATH +=../../vlc(0_9)/include/
-LIBS += -L../../vlc(0_9)/lib -lvlc-qt-widgets
-LIBS += -L../../vlc(0_9)/lib  -lvlc-qt
+win32
+{
+    win32-msvc2010
+    {
+        INCLUDEPATH +=../../vlc_0_9/include/
+        LIBS += -L../../vlc_0_9/lib -lvlc-qt-widgets
+        LIBS += -L../../vlc_0_9/lib  -lvlc-qt
+    }
+    #else:{}
+    win32-g++
+    {
+        INCLUDEPATH +=../../vlc(0_9)/include/
+        LIBS += -L../../vlc(0_9)/lib -lvlc-qt-widgets
+        LIBS += -L../../vlc(0_9)/lib  -lvlc-qt
+    }
 }
 unix{
     LIBS        += -lvlc-qt -lvlc-qt-widgets
@@ -58,7 +60,6 @@ unix{
 
 #INCLUDEPATH+=D:\\opencv\\opencv249\\opencv\\build\\include
 #INCLUDEPATH+=D:\\opencv\\opencv249\\opencv\\build\\include\\opencv
-
 
 #LIBS += -LD:\opencv\opencv249\opencv\build\x86\vc10\lib\ \
 #-lopencv_core249d \
