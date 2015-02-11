@@ -42,6 +42,11 @@ VideoWgt::VideoWgt(QString Title,int camera,QWidget *parent) :
 
     connect(ui->stop, SIGNAL(clicked()), _player, SLOT(stop()));
     connect(ui->play, SIGNAL(clicked()), _player, SLOT(play()));
+    ui->play->setToolTip("Воспроизвести");
+    ui->stop->setToolTip("Остановить");
+    ui->param->setToolTip("Параметр видеообъекта");
+    ui->record->setToolTip("Запись");
+    ui->onMaxWindow->setToolTip("На всю форму");
     // connect(_player, SIGNAL()), this, SLOT(error(bool)));
 
     QObject::connect(this,SIGNAL(sigClose()),_player,SLOT(stop()));
@@ -52,14 +57,7 @@ VideoWgt::VideoWgt(QString Title,int camera,QWidget *parent) :
      * Заглушка для воспоизведения видео
      * так как библиотека выдает ошибку, если не воспроизводится ни одного файла или потока
      */
-
     _media = new VlcMedia(NULL, true, _instance);
-   /*_media = new VlcMedia("test.mp4", true, _instance);
-    _player->open(_media);
-    _player->stop();
-    */
-
-
     /*************************************************/
     par = new Param(path);
     par->setStyleSheet(this->styleSheet());

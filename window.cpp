@@ -13,8 +13,10 @@ Window::Window(QWidget *parent) :
     ui(new Ui::Window)
 {
     ui->setupUi(this);
-
-
+/*
+    initGui();
+    m_sSettingsFile = QApplication::applicationDirPath().left(1) + ":/demosettings.ini";
+  */
     setWindowTitle(NAME_PROGRAM);
     setWindowIcon(QIcon(PATH_ICON));
     QGridLayout* pgrdLayout = new QGridLayout;
@@ -86,8 +88,9 @@ Window::Window(QWidget *parent) :
 
 
  //worktable = 1;
-    //settings = new QSettings("D:\\wsettings.ini", QSettings::IniFormat,this);
-   // loadSettings();
+   // settings = new QSettings("D:\\wsettings.ini", QSettings::IniFormat,this);
+    settings = new QSettings("D:\\wsettings.ini", QSettings::IniFormat,this);
+    loadSettings();
 }
 
 Window::~Window()
@@ -292,11 +295,53 @@ void Window::help()
 
 void Window::saveSettings()
 {
-
+    /*
+    settings->setValue("x",this->x());
+    settings->setValue("y",this->y());
+    settings->setValue("w",this->width());
+    settings->setValue("h",this->height());
+    */
+    settings->beginGroup("MainForm");
+    settings->setValue("geometry",geometry());
+    settings->beginGroup("client");
+    settings->setValue("geometry",geometry());
+    settings->beginGroup("database");
+    settings->setValue("geometry",geometry());
+    settings->endGroup();
+    settings->endGroup();
+    settings->endGroup();
 }
 
 void Window::loadSettings()
 {
+    /*
+    int this_x1 = settings->value("x",this->x()).toInt();
+    int this_y1 = settings->value("y",this->y()).toInt();
+    int this_w = settings->value("w",this->width()).toInt();
+    int this_h = settings->value("h",this->height()).toInt();
+    this->setGeometry(this_x1,this_y1,this_w,this_h);
+    */
+     settings->beginGroup("MainForm");
+    this->setGeometry(settings->value("geometry",QRect(this->x(),this->y(),this->width(),this->height())).toRect());
+    settings->beginGroup("client");
+    client->setGeometry(settings->value("geometry",QRect(client->x(),client->y(),client->width(),client->height())).toRect());
+    settings->beginGroup("database");
+    databases->setGeometry(settings->value("geometry",QRect(databases->x(),databases->y(),databases->width(),databases->height())).toRect());
+    settings->endGroup();
+    settings->endGroup();
+    settings->endGroup();
+
+    /*
+    int cli_x1 = SETXY(screen.x(),screen.width(),client->width());
+    int cli_y1 = SETXY(screen.y(),screen.height(),client->height());
+    int db_x1 = SETXY(screen.x(),screen.width(),databases->width());
+    int db_y1 = SETXY(screen.y(),screen.height(),databases->height());
+    */
+    /*
+    this->setGeometry(this_x1,this_y1,this->width(),this->height());
+    client->setGeometry(cli_x1,cli_y1,client->width(),client->height());
+    databases->setGeometry(db_x1,db_y1,databases->width(),databases->height());
+    */
     //setWindowsTitle(settings->value("title","MainForm").toString());
 }
 

@@ -31,6 +31,8 @@ class Window : public QWidget
 private:
     int fullscr;
     int worktable;
+    QString m_sSettingsFile;
+    void initGui();
 
     
 public:
