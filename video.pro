@@ -47,15 +47,16 @@ win32
         LIBS += -L../../vlc_0_9/lib  -lvlc-qt
     }
     #else:{}
-    win32-g++
-    {
-        INCLUDEPATH +=../../vlc(0_9)/include/
-        LIBS += -L../../vlc(0_9)/lib -lvlc-qt-widgets
-        LIBS += -L../../vlc(0_9)/lib  -lvlc-qt
-    }
+    #win32-g++
+    #{
+    #    INCLUDEPATH +=../../vlc(0_9)/include/
+    #    LIBS += -L../../vlc(0_9)/lib -lvlc-qt-widgets
+    #    LIBS += -L../../vlc(0_9)/lib  -lvlc-qt
+    #}
 }
 unix{
     LIBS        += -lvlc-qt -lvlc-qt-widgets
+    DEFINES = DEFAULT_SCREEN
 }
 
 #INCLUDEPATH+=D:\\opencv\\opencv249\\opencv\\build\\include
@@ -74,10 +75,11 @@ unix{
 #-lopencv_ml249d \
 #-lopencv_imgproc249d
 
-
-win32 {
 RESOURCES += \
     resourses.qrc
+RC_FILE = myicon.rc
+
+win32 {
 RC_FILE = myicon.rc
 
 }

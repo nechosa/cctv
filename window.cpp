@@ -44,10 +44,12 @@ Window::Window(QWidget *parent) :
     }
     ui->_wgt->setLayout(pgrdLayout);
 
+    int scr = QApplication::screens().count();
+    #ifdef DEFAULT_SCREEN
+    scr = 0;
+    #endif
 
-
-
-    switch (QApplication::screens().count()) {
+    switch (scr) {
     case 2:
         worktable = 1;
        // worktable = 0;
