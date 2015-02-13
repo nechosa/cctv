@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "databaseconf.h"
+#include "const.h"
 #include "udpclient.h"
 #include <QMouseEvent>
 #include "videowgt.h"
@@ -11,10 +12,6 @@
 #include <QVector>
 #include <QProcess>
 #include <QSettings>
-
-#define NAME_PROGRAM "Представление  видеоинформации"
-#define CAMERA "Камера"
-#define PATH_ICON ":/icons/vista_189.ico"
 
 /*
 Класс для отображения и компоновки главной формы
@@ -32,7 +29,7 @@ private:
     int fullscr;
     int worktable;
     QString m_sSettingsFile;
-    void initGui();
+    void initSettings();
 
     
 public:

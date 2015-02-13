@@ -44,6 +44,20 @@ Window::Window(QWidget *parent) :
     }
     ui->_wgt->setLayout(pgrdLayout);
 
+    QFile file(PATH_SETTINGS);
+    if (!file.exists())
+    {
+        initSettings();
+    }
+    else
+    {
+        settings = new QSettings(PATH_SETTINGS, QSettings::IniFormat,this);
+        loadSettings();
+    }
+}
+
+void Window::initSettings()
+{
     int scr = QApplication::screens().count();
     #ifdef DEFAULT_SCREEN
     scr = 0;
@@ -75,26 +89,7 @@ Window::Window(QWidget *parent) :
     this->setGeometry(this_x1,this_y1,this->width(),this->height());
     client->setGeometry(cli_x1,cli_y1,client->width(),client->height());
     databases->setGeometry(db_x1,db_y1,databases->width(),databases->height());
-
-    //screen = QApplication::desktop()->screenGeometry(worktable);
-    //Add Settings
-    //this->setGeometry();
-    //client->setGeometry();
-    //databases->setGeometry();
-
-    //No Settings
-    /*
-    worktable = !worktable;
-    moveScreen();
-    */
-
-
- //worktable = 1;
-   // settings = new QSettings("D:\\wsettings.ini", QSettings::IniFormat,this);
-    settings = new QSettings("D:\\wsettings.ini", QSettings::IniFormat,this);
-    loadSettings();
 }
-
 Window::~Window()
 {
     saveSettings();
@@ -276,39 +271,29 @@ void Window::help()
 {
     //QString strCommand="cmd.exe"; QString strCommand="help_sys.exe --number";
     v_process = new QProcess();
-    QString strCommand="help_sys";
     QStringList arguments;
-    arguments << "--number" <<"1";
-
-    qDebug()<<"Try start "<<strCommand;
-    v_process->start(strCommand,arguments);
+    arguments << HELP_ARG1 <<HELP_ARG2;
+    v_process->start(HELP,arguments);
     if (v_process->waitForStarted())
     {
-        qDebug()<<"start process "<<strCommand;
+        qDebug()<<"start process "<<HELP;
     }
     else
     {
-        qDebug()<<"Cannot start process "<<strCommand;
-        v_process->execute(strCommand,arguments);
+        qDebug()<<"Cannot start process "<<HELP;
+        v_process->execute(HELP,arguments);
     }
-
-
 }
 
 void Window::saveSettings()
 {
-    /*
-    settings->setValue("x",this->x());
-    settings->setValue("y",this->y());
-    settings->setValue("w",this->width());
-    settings->setValue("h",this->height());
-    */
-    settings->beginGroup("MainForm");
-    settings->setValue("geometry",geometry());
-    settings->beginGroup("client");
-    settings->setValue("geometry",geometry());
-    settings->beginGroup("database");
-    settings->setValue("geometry",geometry());
+    settings->beginGroup(SET_BEGIN_GRP);
+    settings->setValue(SET_GEOMETRY,geometry());
+    settings->setValue(SCREEN,worktable);
+    settings->beginGroup(SET_CLIENT);
+    settings->setValue(SET_GEOMETRY,geometry());
+    settings->beginGroup(SET_DB);
+    settings->setValue(SET_GEOMETRY,geometry());
     settings->endGroup();
     settings->endGroup();
     settings->endGroup();
@@ -316,35 +301,16 @@ void Window::saveSettings()
 
 void Window::loadSettings()
 {
-    /*
-    int this_x1 = settings->value("x",this->x()).toInt();
-    int this_y1 = settings->value("y",this->y()).toInt();
-    int this_w = settings->value("w",this->width()).toInt();
-    int this_h = settings->value("h",this->height()).toInt();
-    this->setGeometry(this_x1,this_y1,this_w,this_h);
-    */
-     settings->beginGroup("MainForm");
-    this->setGeometry(settings->value("geometry",QRect(this->x(),this->y(),this->width(),this->height())).toRect());
-    settings->beginGroup("client");
-    client->setGeometry(settings->value("geometry",QRect(client->x(),client->y(),client->width(),client->height())).toRect());
-    settings->beginGroup("database");
-    databases->setGeometry(settings->value("geometry",QRect(databases->x(),databases->y(),databases->width(),databases->height())).toRect());
+    settings->beginGroup(SET_BEGIN_GRP);
+    this->setGeometry(settings->value(SET_GEOMETRY,QRect(this->x(),this->y(),this->width(),this->height())).toRect());
+    worktable = settings->value(SCREEN,0).toInt();
+    settings->beginGroup(SET_CLIENT);
+    client->setGeometry(settings->value(SET_GEOMETRY,QRect(client->x(),client->y(),client->width(),client->height())).toRect());
+    settings->beginGroup(SET_DB);
+    databases->setGeometry(settings->value(SET_GEOMETRY,QRect(databases->x(),databases->y(),databases->width(),databases->height())).toRect());
     settings->endGroup();
     settings->endGroup();
     settings->endGroup();
-
-    /*
-    int cli_x1 = SETXY(screen.x(),screen.width(),client->width());
-    int cli_y1 = SETXY(screen.y(),screen.height(),client->height());
-    int db_x1 = SETXY(screen.x(),screen.width(),databases->width());
-    int db_y1 = SETXY(screen.y(),screen.height(),databases->height());
-    */
-    /*
-    this->setGeometry(this_x1,this_y1,this->width(),this->height());
-    client->setGeometry(cli_x1,cli_y1,client->width(),client->height());
-    databases->setGeometry(db_x1,db_y1,databases->width(),databases->height());
-    */
-    //setWindowsTitle(settings->value("title","MainForm").toString());
 }
 
 void Window::keyReleaseEvent(QKeyEvent *event){
@@ -357,24 +323,16 @@ void Window::keyReleaseEvent(QKeyEvent *event){
     case Qt::Key_F5:
         showOn_MaxMin();
         break;
-    case Qt::Key_X:
-        qDebug()<<"x"<<this->x();
-        break;
-    case Qt::Key_Y:
-        qDebug()<<"y"<< this->y();
-        break;
     case Qt::Key_F1:
         qDebug()<<"F1";
         this->help();
         break;
 
     case Qt::Key_S:
-        w[0]->setVisibleButtons();
-        w[1]->setVisibleButtons();
-        w[2]->setVisibleButtons();
-        w[3]->setVisibleButtons();
-        w[4]->setVisibleButtons();
-        w[5]->setVisibleButtons();
+        for(int i = 0;i<6;++i)
+        {
+             w[i]->setVisibleButtons();
+        }
         break;
     default:
         break;

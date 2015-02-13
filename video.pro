@@ -29,6 +29,8 @@ HEADERS  += videowgt.h \    window.h \
     param.h \
     databaseconf.h \
     udpclient.h \
+    const.h \
+    version.h \
     connectsettingsdb.h
 
 FORMS    += videowgt.ui \
@@ -40,18 +42,18 @@ FORMS    += videowgt.ui \
 
 win32
 {
-    win32-msvc2010
-    {
-        INCLUDEPATH +=../../vlc_0_9/include/
-        LIBS += -L../../vlc_0_9/lib -lvlc-qt-widgets
-        LIBS += -L../../vlc_0_9/lib  -lvlc-qt
-    }
+    #win32-msvc2010
+    #{
+    #    INCLUDEPATH +=../../vlc_0_9/include/
+    #    LIBS += -L../../vlc_0_9/lib -lvlc-qt-widgets
+    #    LIBS += -L../../vlc_0_9/lib  -lvlc-qt
+    #}
     #else:{}
     #win32-g++
     #{
-    #    INCLUDEPATH +=../../vlc(0_9)/include/
-    #    LIBS += -L../../vlc(0_9)/lib -lvlc-qt-widgets
-    #    LIBS += -L../../vlc(0_9)/lib  -lvlc-qt
+        INCLUDEPATH +=../../vlc(0_9)/include/
+        LIBS += -L../../vlc(0_9)/lib -lvlc-qt-widgets
+        LIBS += -L../../vlc(0_9)/lib  -lvlc-qt
     #}
 }
 unix{
