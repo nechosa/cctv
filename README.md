@@ -1,6 +1,6 @@
 # cctv
 CCTV system
-<h1>HOT KEY</h1>
+<h1>HOT KEY (ГОРЯЧИЕ КЛАВИШИ)</h1>
 
 <p>Ctrl+M - move other screen (перетащить на другой экран)</p>
 <p>Ctrl+К - show layout panel (отобразить панель компоновки)</p>
