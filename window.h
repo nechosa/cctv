@@ -12,6 +12,7 @@
 #include <QVector>
 #include <QProcess>
 #include <QSettings>
+#include <QLayout>
 
 /*
 Класс для отображения и компоновки главной формы
@@ -26,17 +27,28 @@ class Window : public QWidget
     Q_OBJECT
 
 private:
+    int layout_type;
     int fullscr;
-    int worktable;
-    QString m_sSettingsFile;
     void initSettings();
+    void initScreen();
+    bool lay;
+    void showPanel();
+    void setLayoutType(int layout);
+    int getLayoutType();
+    QGridLayout* pgrdLayout6;
+    QGridLayout* pgrdLayout4;
+    QGridLayout* pgrdLayout3;
+    QString m_sSettingsFile;
+    int worktable;
+     bool panel;
+
 
     
 public:
 
     explicit Window(QWidget *parent = 0);
     ~Window();
-    VideoWgt *w[6];//обьекты видеоизображений
+    QVector <VideoWgt *> w;//обьекты видеоизображений
     QRect screen;
     int key1;
 
@@ -49,13 +61,30 @@ public:
 private slots:
 
     void play_in_Window(QString path,unsigned int operStatus);
-    void on_but_3_clicked();
+
     void showOn_MaxMin();
     void moveScreen(bool change = true);
-    void on_param_clicked();
+
+    void showLayout();
+    void showClient();
+    void showBase();
+
+    void layoutx(int num);
+    void layoutx_h(int num);
+    void layoutx_v(int num);
+
+    void layout2_h();
+    void layout2_v();
+    void layout3_h();
+    void layout3_v();
+    void layout4_h();
+    void layout4_v();
+    void layout4();
+    void layout6();
 
 public slots:
     void showMaxCam(int);
+
 
 private:
     Ui::Window *ui;

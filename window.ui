@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>965</width>
-    <height>588</height>
+    <width>886</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -926,30 +926,28 @@ QTreeView::indicator:disabled, QTableView::indicator:disabled, QRadioButton::ind
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <property name="leftMargin">
-    <number>6</number>
-   </property>
-   <property name="topMargin">
-    <number>6</number>
-   </property>
-   <property name="rightMargin">
-    <number>6</number>
-   </property>
-   <property name="bottomMargin">
+   <property name="margin">
     <number>6</number>
    </property>
    <property name="spacing">
     <number>6</number>
    </property>
-   <item row="0" column="0">
+   <item row="2" column="0">
     <widget class="QWidget" name="_wgt" native="true"/>
    </item>
-   <item row="1" column="0">
+   <item row="3" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QPushButton" name="showbut">
        <property name="text">
         <string>Скрыть/Показать кнопки</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="layout">
+       <property name="text">
+        <string>Компоновка</string>
        </property>
       </widget>
      </item>
@@ -973,6 +971,199 @@ QTreeView::indicator:disabled, QTableView::indicator:disabled, QRadioButton::ind
         <string>Переместить на другой рабочий стол</string>
        </property>
       </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="bt_layout2_h">
+       <property name="minimumSize">
+        <size>
+         <width>84</width>
+         <height>34</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>84</width>
+         <height>84</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image:url(:/icons/2_v.png);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="bt_layout2_v">
+       <property name="minimumSize">
+        <size>
+         <width>84</width>
+         <height>34</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>84</width>
+         <height>84</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image:url(:/icons/2_h.png);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="bt_layout4">
+       <property name="minimumSize">
+        <size>
+         <width>84</width>
+         <height>34</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>84</width>
+         <height>84</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image:url(:/icons/4_hv.png);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="bt_layout3_h">
+       <property name="minimumSize">
+        <size>
+         <width>84</width>
+         <height>34</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>84</width>
+         <height>84</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image:url(:/icons/3_v.png);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="bt_layout3_v">
+       <property name="minimumSize">
+        <size>
+         <width>84</width>
+         <height>34</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>84</width>
+         <height>84</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image:url(:/icons/3_h.png);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="bt_layout6">
+       <property name="minimumSize">
+        <size>
+         <width>84</width>
+         <height>34</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>84</width>
+         <height>84</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image:url(:/icons/6_v.png);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="bt_layout4_h">
+       <property name="minimumSize">
+        <size>
+         <width>84</width>
+         <height>34</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>84</width>
+         <height>84</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image:url(:/icons/4_v.png);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="bt_layout4_v">
+       <property name="minimumSize">
+        <size>
+         <width>84</width>
+         <height>34</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>84</width>
+         <height>84</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image:url(:/icons/4_h.png);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>

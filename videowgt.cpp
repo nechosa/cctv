@@ -1,4 +1,5 @@
 #include "videowgt.h"
+#include "const.h"
 //#include "param.h"
 #include "ui_videowgt.h"
 
@@ -42,22 +43,27 @@ VideoWgt::VideoWgt(QString Title,int camera,QWidget *parent) :
 
     connect(ui->stop, SIGNAL(clicked()), _player, SLOT(stop()));
     connect(ui->play, SIGNAL(clicked()), _player, SLOT(play()));
-    ui->play->setToolTip("Воспроизвести");
-    ui->stop->setToolTip("Остановить");
-    ui->param->setToolTip("Параметр видеообъекта");
-    ui->record->setToolTip("Запись");
+    ui->play->setToolTip(PLAY);
+    ui->stop->setToolTip(STOP);
+    ui->param->setToolTip(PARAMETR);
+    ui->record->setToolTip(RECORD);
     ui->onMaxWindow->setToolTip("На всю форму");
     // connect(_player, SIGNAL()), this, SLOT(error(bool)));
 
     QObject::connect(this,SIGNAL(sigClose()),_player,SLOT(stop()));
-    QObject::connect(this,SIGNAL(clicked()),SLOT(mySlot()));
-    QObject::connect(ui->groupBox,SIGNAL(clicked()),SLOT(mySlot()));
+   // QObject::connect(this,SIGNAL(clicked()),SLOT(mySlot()));
+    //QObject::connect(ui->groupBox,SIGNAL(clicked()),SLOT(mySlot()));
     // QObject::connect( _player,SIGNAL(),this,SLOT(test()));
     /*************************************************
      * Заглушка для воспоизведения видео
      * так как библиотека выдает ошибку, если не воспроизводится ни одного файла или потока
      */
-    _media = new VlcMedia(NULL, true, _instance);
+    //_media = new VlcMedia("test.mp4", true, _instance);
+    path = QString("test.mp4");
+    //_media = new VlcMedia(path, true, _instance);
+    //_player->open(_media);
+     _media = new VlcMedia(path, true, _instance);
+    //  qDebug()<<"  SET VLC INSTANSE";
     /*************************************************/
     par = new Param(path);
     par->setStyleSheet(this->styleSheet());
@@ -173,12 +179,12 @@ bool VideoWgt::eventFilter(QObject *obj, QEvent *event)
     return false;
 
 }
-
+/*
 void VideoWgt::mySlot()
 {
     qDebug()<<"mySlot";
 }
-
+*/
 void VideoWgt::setPath(QString newpath)
 {
     path = newpath;
@@ -225,12 +231,12 @@ void VideoWgt::openUrl()
 
 VideoWgt::~VideoWgt()
 {    
-    qDebug()<<"Free VideoWgt";
+    //qDebug()<<"Free VideoWgt";
+    delete par;
     delete ui;
     delete _player;
     delete _media;
     delete _instance;
-    qDebug()<<"Delete All";
 }
 
 void VideoWgt::setNumber(int n)
@@ -269,7 +275,7 @@ void VideoWgt::setVisibleButtons()
         ui->param->setVisible(true);
         visibleButtons = true;
     }
-    qDebug()<< "TRY SET";
+
 
 }
 
@@ -303,11 +309,13 @@ void VideoWgt::setVideoWidgetTitle(QString title)
     ui->groupBox->setTitle(title);
 }
 
+/*
 void VideoWgt::on_volume_clicked()
 {
 
 }
-
+*/
+/*
 void VideoWgt::on_but_volume_clicked()
 {
 
@@ -317,7 +325,7 @@ void VideoWgt::on_video_fullscreen()
 {
 
 }
-
+*/
 void VideoWgt::setWindowScreen(int screen,QDesktopWidget * desktopWindow){
     Q_UNUSED(desktopWindow);
     worktable = screen;
@@ -333,11 +341,12 @@ void VideoWgt::on_groupBox_clicked(bool checked)
     Q_UNUSED(checked);
     this->setVisibleButtons();
 }
-
+/*
 void VideoWgt::on_video_clicked()
 {
     this->setVisibleButtons();
 }
+*/
 
 void VideoWgt::showMaxCam7()
 {

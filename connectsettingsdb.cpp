@@ -10,5 +10,6 @@ ConnectSettingsDB::ConnectSettingsDB(QWidget *parent) :
 
 ConnectSettingsDB::~ConnectSettingsDB()
 {
+ //qDebug()<<"Free ConnectSettingsDB";
     //delete ui;
 }

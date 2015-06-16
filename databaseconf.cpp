@@ -19,7 +19,7 @@ DatabaseConf::DatabaseConf(QWidget *parent) :
 
 DatabaseConf::~DatabaseConf()
 {
-    qDebug()<< "close DatabaseConf";
+    //qDebug()<< "close DatabaseConf";
     delete ui;
     db1.close();
     db2.close();

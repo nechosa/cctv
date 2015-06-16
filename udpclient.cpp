@@ -13,11 +13,11 @@ UdpClient::UdpClient(QWidget *parent) :
     //append("Received:"+dateTime.toString());
     if (!rez)
     {
-        qWarning("Port  %i can't be open", 4372);
+    //    qWarning("Port  %i can't be open", 4372);
         ui->log->append("Port "+ui->lineEdit->text()+ " can't be open");
     }
     else
-        qWarning("Port %i is open!", 4372);
+    //    qWarning("Port %i is open!", 4372);
     ui->log->append("Port  "+ui->lineEdit->text()+"  is open");
     connect(m_pudp,SIGNAL(readyRead()),SLOT(slotProcessDatagrams()));
 }
@@ -72,6 +72,7 @@ void UdpClient::slotProcessDatagrams()
 }
 UdpClient::~UdpClient()
 {
+// qDebug()<<"Free UdpClient";
     delete ui;
     m_pudp->close();
     m_pudp->disconnectFromHost();
@@ -130,8 +131,9 @@ void UdpClient::on_clean_clicked()
 {
     ui->log->clear();
 }
-
+/*
 void UdpClient::on_showCod_clicked()
 {
 
 }
+*/

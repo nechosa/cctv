@@ -55,7 +55,7 @@ public:
     bool getvisibleControlButtons() const;
     void setWindowScreen(int screen,QDesktopWidget * desktopWindow);
     int worktable;
-    ~VideoWgt();
+    virtual ~VideoWgt();
     // void setCount();//установка счетчика
     //  virtual void mouseDoubleClickEvent(QMouseEvent *pe);
     void setNumber(int n);
@@ -86,15 +86,15 @@ private slots:
     void on_onMaxWindow_clicked();
     void on_param_clicked();
     void on_record_clicked();
-    void mySlot();
+    //void mySlot();
     void on_play_clicked();
     void on_stop_clicked();
-    void on_volume_clicked();
-    void on_but_volume_clicked();
-    void on_video_fullscreen();
+//    void on_volume_clicked();
+//    void on_but_volume_clicked();
+//    void on_video_fullscreen();
     void on_groupBox_clicked();
     void on_groupBox_clicked(bool checked);
-    void on_video_clicked();
+//    void on_video_clicked();
 
 public slots:
     void play(QString path);

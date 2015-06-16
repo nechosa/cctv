@@ -16,6 +16,7 @@ Param::Param(QString path,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Param)
 {
+// qDebug()<<"Free Param";
     ui->setupUi(this);
     streampath = path;
     ui->comboAudio->addItems(Vlc::audioCodec());
@@ -27,7 +28,7 @@ Param::Param(QString path,QWidget *parent) :
 
 Param::~Param()
 {
-    qDebug()<< "close Param";
+    //qDebug()<< "close Param";
     if (db.isOpen())
         db.close();
     delete ui;
@@ -67,17 +68,18 @@ void Param::on_buttonBrowse_clicked()
 
     ui->editPath->setText(path);
 }
-
+/*
 void Param::on_pushButton_clicked()
 {
     //ui->tableView->setModel(model);
 }
-
+*/
+/*
 void Param::on_tabWidget_selected(const QString &arg1)
 {
     ui->label->setText(arg1);
 }
-
+*/
 /*
 void Param::on_tabWidget_currentChanged(QWidget *arg1)
 {

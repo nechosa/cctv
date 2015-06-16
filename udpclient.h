@@ -31,7 +31,7 @@ public:
     ~UdpClient();
 #pragma pack(1)
     struct asupMnenoTest {
-        char marker[5];//Заголовок пакета ASUPP
+        char marker[6];//Заголовок пакета ASUPP
         unsigned int codoper;//Код операции 2 байта
         unsigned char operStatus;//Статус оперции 0-начата;1-завершена;2-вручную
         unsigned char nameLenth;//Длина строки
@@ -50,7 +50,7 @@ private slots:
 
     void on_clean_clicked();
 
-    void on_showCod_clicked();
+//    void on_showCod_clicked();
 
 signals:
     void datasent(const QString);

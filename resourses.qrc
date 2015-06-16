@@ -36,5 +36,13 @@
         <file>qss_icons/rc/webcam_remove_256.ico</file>
         <file>qss_icons/rc/webcam_save_256.ico</file>
         <file>qss_icons/rc/webcam_zoom_256.ico</file>
+        <file>icons/2_h.png</file>
+        <file>icons/2_v.png</file>
+        <file>icons/4_h.png</file>
+        <file>icons/4_hv.png</file>
+        <file>icons/4_v.png</file>
+        <file>icons/6_v.png</file>
+        <file>icons/3_h.png</file>
+        <file>icons/3_v.png</file>
     </qresource>
 </RCC>

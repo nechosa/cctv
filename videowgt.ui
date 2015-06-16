@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>894</width>
-    <height>596</height>
+    <width>500</width>
+    <height>445</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>300</width>
+    <height>250</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
   </property>
   <property name="palette">
    <palette>
@@ -1428,7 +1440,16 @@ QTreeView::indicator:disabled, QTableView::indicator:disabled, QRadioButton::ind
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <property name="spacing">
@@ -1438,8 +1459,8 @@ QTreeView::indicator:disabled, QTableView::indicator:disabled, QRadioButton::ind
     <widget class="QGroupBox" name="groupBox">
      <property name="minimumSize">
       <size>
-       <width>500</width>
-       <height>400</height>
+       <width>300</width>
+       <height>250</height>
       </size>
      </property>
      <property name="title">
@@ -1492,14 +1513,14 @@ QTreeView::indicator:disabled, QTableView::indicator:disabled, QRadioButton::ind
          <widget class="QPushButton" name="play">
           <property name="minimumSize">
            <size>
-            <width>84</width>
-            <height>34</height>
+            <width>50</width>
+            <height>50</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>75</width>
-            <height>75</height>
+            <width>50</width>
+            <height>50</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1514,14 +1535,14 @@ QTreeView::indicator:disabled, QTableView::indicator:disabled, QRadioButton::ind
          <widget class="QPushButton" name="stop">
           <property name="minimumSize">
            <size>
-            <width>84</width>
-            <height>34</height>
+            <width>50</width>
+            <height>50</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>75</width>
-            <height>75</height>
+            <width>50</width>
+            <height>50</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1539,14 +1560,14 @@ QTreeView::indicator:disabled, QTableView::indicator:disabled, QRadioButton::ind
           </property>
           <property name="minimumSize">
            <size>
-            <width>84</width>
-            <height>34</height>
+            <width>50</width>
+            <height>50</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>75</width>
-            <height>75</height>
+            <width>50</width>
+            <height>50</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1564,14 +1585,14 @@ QTreeView::indicator:disabled, QTableView::indicator:disabled, QRadioButton::ind
           </property>
           <property name="minimumSize">
            <size>
-            <width>84</width>
-            <height>34</height>
+            <width>50</width>
+            <height>50</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>75</width>
-            <height>75</height>
+            <width>50</width>
+            <height>50</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1586,14 +1607,14 @@ QTreeView::indicator:disabled, QTableView::indicator:disabled, QRadioButton::ind
          <widget class="QPushButton" name="onMaxWindow">
           <property name="minimumSize">
            <size>
-            <width>84</width>
-            <height>34</height>
+            <width>50</width>
+            <height>50</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>75</width>
-            <height>75</height>
+            <width>50</width>
+            <height>50</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1640,8 +1661,8 @@ QTreeView::indicator:disabled, QTableView::indicator:disabled, QRadioButton::ind
         </property>
         <property name="minimumSize">
          <size>
-          <width>450</width>
-          <height>300</height>
+          <width>200</width>
+          <height>150</height>
          </size>
         </property>
         <property name="maximumSize">
