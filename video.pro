@@ -31,8 +31,7 @@ SOURCES += main.cpp\
         param.cpp \
         databaseconf.cpp \
         udpclient.cpp \
-        connectsettingsdb.cpp \
-    layout.cpp
+        connectsettingsdb.cpp 
 
 HEADERS  += videowgt.h \
         window.h \
@@ -41,16 +40,14 @@ HEADERS  += videowgt.h \
         udpclient.h \
         const.h \
         version.h \
-        connectsettingsdb.h \
-    layout.h
+        connectsettingsdb.h 
 
 FORMS    += videowgt.ui \
     window.ui \
     param.ui \
     databaseconf.ui \
     udpclient.ui \
-    connectsettingsdb.ui \
-    layout.ui
+    connectsettingsdb.ui 
 
 LIBVLC = -lvlc-qt -lvlc-qt-widgets
 
