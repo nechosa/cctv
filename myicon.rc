@@ -1,4 +1,4 @@
-IDI_ICON1               ICON    DISCARDABLE     "vista_189.ico"
+IDI_ICON1               ICON    DISCARDABLE     "icons/vista_189.ico"
 
 #include <windows.h>
 #include "version.h"

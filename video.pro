@@ -39,7 +39,6 @@ HEADERS  += videowgt.h \
         databaseconf.h \
         udpclient.h \
         const.h \
-        version.h \
         connectsettingsdb.h 
 
 FORMS    += videowgt.ui \
@@ -48,6 +47,9 @@ FORMS    += videowgt.ui \
     databaseconf.ui \
     udpclient.ui \
     connectsettingsdb.ui 
+
+OTHER_FILES = version.h \
+              myicon.rc
 
 LIBVLC = -lvlc-qt -lvlc-qt-widgets
 
