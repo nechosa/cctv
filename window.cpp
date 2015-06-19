@@ -36,7 +36,8 @@ Window::Window(QWidget *parent) :
     connect(ui->bt_layout4_h,SIGNAL(clicked()),this,SLOT(layout4_h()));
     connect(ui->bt_layout4_v,SIGNAL(clicked()),this,SLOT(layout4_v()));
     connect(ui->layout,SIGNAL(clicked()),this,SLOT(showLayout()));
-
+   w.reserve(6);
+    // w.resize(6);
     showLayout();
     showPanel();
 
